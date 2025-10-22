@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:note_arkadasim/components/enums/NA_button_types.dart';
 import 'package:note_arkadasim/services/api_services/get_initial_api/get_initial_upsert_service.dart';
 import 'package:note_arkadasim/themes/theme.dart';
+import 'package:note_arkadasim/validation/enums/validation_field_types.dart';
+import 'package:note_arkadasim/validation/validate_name.dart';
+import 'package:note_arkadasim/validation/validate_password.dart';
+import 'package:note_arkadasim/validation/validate_surname.dart';
+import 'package:note_arkadasim/validation/validate_username.dart';
+import 'package:note_arkadasim/validation/validator.dart';
 
 import '../../../components/NA_button/NA_button.dart';
 import '../../../components/NA_classic_header/NA_classic_header.dart';
@@ -9,6 +15,7 @@ import '../../../components/NA_dropdown/NA_dropdown.dart';
 import '../../../components/NA_link/NA_link.dart';
 import '../../../components/NA_text_field/NA_text_field.dart';
 import '../../../services/api_services/get_initial_api/utils.dart';
+import '../../../validation/email_validation.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -92,27 +99,6 @@ class _RegisterPageState extends State<RegisterPage> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email gereklidir';
-    }
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(value)) {
-      return 'Geçerli bir email adresi giriniz';
-    }
-    return null;
-  }
-
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Şifre gereklidir';
-    }
-    if (value.length < 6) {
-      return 'Şifre en az 6 karakter olmalıdır';
-    }
-    return null;
   }
 
   String? _validateConfirmPassword(String? value) {
@@ -240,16 +226,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _emailController,
                         label: 'Email',
                         keyboardType: TextInputType.emailAddress,
-                        validator: _validateEmail,
+                        validator: validateEmail,
                         prefixIcon: Icons.email_outlined,
                       ),
                       const SizedBox(height: 20),
                       buildTextField(
                         controller: _usernameController,
                         label: 'Kullanıcı Adı',
-                        validator: (value) => value?.isEmpty ?? true
-                            ? 'Kullanıcı adı gereklidir'
-                            : null,
+                        validator: validateUsername,
                         prefixIcon: Icons.person_outline,
                       ),
                       const SizedBox(height: 20),
@@ -277,7 +261,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _passwordController,
                         label: 'Şifre',
                         obscureText: !_isPasswordVisible,
-                        validator: _validatePassword,
+                        validator: validatePassword,
                         prefixIcon: Icons.lock_outline,
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -333,16 +317,14 @@ class _RegisterPageState extends State<RegisterPage> {
           buildTextField(
             controller: _nameController,
             label: 'Ad',
-            validator: (value) =>
-            value?.isEmpty ?? true ? 'Ad gereklidir' : null,
+            validator: validateName,
             prefixIcon: Icons.person_outline,
           ),
           const SizedBox(height: 20),
           buildTextField(
             controller: _surnameController,
             label: 'Soyad',
-            validator: (value) =>
-            value?.isEmpty ?? true ? 'Soyad gereklidir' : null,
+            validator: validateSurname,
             prefixIcon: Icons.person_outline,
           ),
         ],

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_arkadasim/pages/auth/change_password/change_password_page.dart';
-import 'package:note_arkadasim/pages/auth/email/email_page.dart';
-import 'package:note_arkadasim/pages/auth/login/login_page.dart';
-import 'package:note_arkadasim/pages/auth/register/register_page.dart';
+import 'package:note_arkadasim/pages/add_news/add_news_page.dart';
+import 'package:note_arkadasim/pages/add_note/add_note_page.dart';
 import 'package:note_arkadasim/pages/home/home_page.dart';
-import 'package:note_arkadasim/pages/on_board/onboard_page.dart';
 import 'package:note_arkadasim/routes/routes.dart';
 import 'package:note_arkadasim/services/navigation_service/navigation_service.dart';
 
@@ -23,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const LoginPage(),
+      home: const HomePage(),
       routes: AppRoutes.routes,
     );
   }

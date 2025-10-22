@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:note_arkadasim/components/NA_password_text_field/NA_password_text_field.dart';
-import 'package:note_arkadasim/components/NA_text/NA_text.dart';
 import 'package:note_arkadasim/components/enums/NA_button_types.dart';
 import '../../../components/NA_button/NA_button.dart';
 import '../../../components/NA_link/NA_link.dart';
+import '../../../components/NA_remember_me_checkbox/NA_remember_me_checkbox.dart';
 import '../../../components/NA_text_field/NA_text_field.dart';
 import '../../../services/navigation_service/navigation_service.dart';
 import '../../../themes/theme.dart';
@@ -27,6 +27,10 @@ class _LoginPageState extends State<LoginPage> {
     if (true) {
       NavigationService.instance.go("/home");
     }
+  }
+
+  void handleRememberMe() {
+    /// TO-DO
   }
 
   @override
@@ -72,7 +76,19 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 20,),
                         buildNAButton(theme, _isLoading, handleLogin, NAButtonTypes.LOGIN, "Giriş Yap", MediaQuery.of(context).size),
                         SizedBox(height: 10,),
-                        buildLoginLink(theme , "Hesabınız yok mu? ", "Kayıt Ol", "/register" ),
+                        Row(
+                          children: [
+                            RememberMeCheckbox(
+                              initialValue: false,
+                              onChanged: (value) {
+                                print("Remember Me: $value");
+                                handleRememberMe();
+                              },
+                            ),
+                            SizedBox(width: 10,),
+                            buildLoginLink(theme , "Hesabınız yok mu? ", "Kayıt Ol", "/register" ),
+                          ],
+                        ),
                         SizedBox(height: 10,),
                         buildLoginLink(theme , "Şifremi unuttum ", "Şifremi unuttum", "/change-password" ),
                         SizedBox(height: 50,),
