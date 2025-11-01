@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui'; // For BackdropFilter
 
 Widget buildNaNavigationBar({
   required int currentIndex,
@@ -6,48 +7,69 @@ Widget buildNaNavigationBar({
 }) {
   return Container(
     decoration: BoxDecoration(
-      color: Colors.white,
+      gradient: LinearGradient(
+        colors: [Colors.purple.shade50, Colors.blue.shade50], // Same gradient as other pages
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
       boxShadow: [
         BoxShadow(
-          color: Colors.black12,
-          blurRadius: 6,
+          color: Colors.purple.withOpacity(0.2), // Purple tinted shadow for consistency
+          blurRadius: 10,
+          spreadRadius: 2,
           offset: const Offset(0, -2),
         ),
       ],
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
     ),
-    child: BottomNavigationBar(
-      currentIndex: currentIndex,
-      onTap: onTap,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.purpleAccent,
-      unselectedItemColor: Colors.grey[400],
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          activeIcon: Icon(Icons.home),
-          label: 'Ana Sayfa',
+    child: ClipRRect(
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // Frosted glass effect
+        child: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: onTap,
+          backgroundColor: Colors.transparent, // Transparent to show frosted glass
+          elevation: 0,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.purple, // Keep purple for selected items
+          unselectedItemColor: Colors.grey[400], // Adjusted for better contrast
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
+              label: 'Ana Sayfa',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.note_outlined),
+              activeIcon: Icon(Icons.note),
+              label: 'Notlar',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.article_outlined),
+              activeIcon: Icon(Icons.article),
+              label: 'Haberler',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_circle_outline),
+              activeIcon: Icon(Icons.add_circle),
+              label: 'Haber Ekle',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.note_add_outlined),
+              activeIcon: Icon(Icons.note_add),
+              label: 'Not Ekle',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              activeIcon: Icon(Icons.person),
+              label: 'Profil',
+            ),
+          ],
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.note_outlined),
-          activeIcon: Icon(Icons.note),
-          label: 'Notlar',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.article_outlined),
-          activeIcon: Icon(Icons.article),
-          label: 'Haberler',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          activeIcon: Icon(Icons.person),
-          label: 'Profil',
-        ),
-      ],
+      ),
     ),
   );
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_arkadasim/themes/theme.dart';
-
-import '../../services/navigation_service/navigation_service.dart'; // Bu import'un dosyada mevcut olduğunu varsayıyoruz
+import '../../services/navigation_service/navigation_service.dart';
 
 Widget buildLoginLink(
     ThemeData theme,

@@ -29,7 +29,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.lightBlueAccent, Colors.purpleAccent],
+          colors: [Colors.lightBlueAccent, Colors.purple],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           stops: [0.0, 1.0], // renkler yumuşak geçiş yapar
