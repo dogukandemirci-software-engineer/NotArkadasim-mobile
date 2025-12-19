@@ -1,0 +1,53 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+*.lock
+.migrate_working_dir/
+
+# IDE / Editor folders
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Flutter / Dart / Pub related
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Generated docs
+**/doc/api/
+
+
+# Android specific
+/android/.gradle/
+/android/app/build/
+/android/local.properties
+
+
+# Symbolication / Obfuscation related
+app.*.symbols
+app.*.map.json
+
+# Others
+*.lock
+*.log
+*.tmp
+*.swp
+.history/
+.svn/
+.swiftpm/
+.atom/
+
+# Exclude debug/profile/release folders inside Android app folder
+/android/app/debug/
+/android/app/profile/
+/android/app/release/
